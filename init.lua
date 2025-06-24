@@ -104,6 +104,9 @@ vim.opt.tabstop = 2 -- largura visual do tab
 vim.opt.shiftwidth = 2 -- largura ao indentar
 vim.opt.softtabstop = 2 -- largura ao pressionar <Tab> ou <BS>
 
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+
 -- Make line numbers default
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -731,6 +734,7 @@ require('lazy').setup({
         'prettierd',
         'black',
         'isort',
+        'sqlfluff',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -792,7 +796,8 @@ require('lazy').setup({
         css = { 'prettierd', 'prettier', stop_after_first = true },
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
         json = { 'prettierd', 'prettier', stop_after_first = true },
-        --sql = { { "sqlfmt", "sqruff", "sql_formatter" } }, -- Ver qual o melhor-add L733
+        sql = { 'sqlfluff' },
+        markdown = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },
@@ -956,6 +961,8 @@ require('lazy').setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+      -- require('mini.tabline').setup() -- Buffers tab bar on top
+      require('mini.comment').setup() -- Auto comments with tree-sitter
     end,
   },
   { -- Highlight, edit, and navigate code
@@ -964,7 +971,25 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'python',
+        'sql',
+        'javascript',
+        'css',
+        'json',
+        'typescript',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -996,8 +1021,8 @@ require('lazy').setup({
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
