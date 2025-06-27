@@ -16,18 +16,11 @@ return {
   opts = {
     filesystem = {
       window = {
+        width = 35,
         mappings = {
           ['\\'] = 'close_window',
         },
       },
-      -- filtered_items = {
-      --   visible = true, -- habilita a exibição
-      --   hide_dotfiles = false, -- exibe arquivos que começam com '.'
-      -- },
-    },
-    source_selector = {
-      winbar = true,
-      statusline = false,
     },
     git_status = {
       symbols = {

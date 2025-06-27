@@ -104,8 +104,8 @@ vim.opt.tabstop = 2 -- largura visual do tab
 vim.opt.shiftwidth = 2 -- largura ao indentar
 vim.opt.softtabstop = 2 -- largura ao pressionar <Tab> ou <BS>
 
-vim.opt.autoindent = true
-vim.opt.smartindent = true
+-- vim.opt.autoindent = true
+-- vim.opt.smartindent = true
 
 -- Make line numbers default
 vim.o.number = true
@@ -117,7 +117,7 @@ vim.o.number = true
 vim.o.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line
-vim.o.showmode = false
+vim.o.showmode = true
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -949,23 +949,24 @@ require('lazy').setup({
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
-      -- local statusline = require 'mini.statusline'
-      -- -- set use_icons to true if you have a Nerd Font
-      -- statusline.setup { vim.g.have_nerd_font }
-      --
-      -- -- You can configure sections in the statusline by overriding their
-      -- -- default behavior. For example, here we set the section for
-      -- -- cursor location to LINE:COLUMN
-      -- ---@diagnostic disable-next-line: duplicate-set-field
-      -- statusline.section_location = function()
-      --   return '%2l:%-2v'
-      -- end
+      local statusline = require 'mini.statusline'
+      -- set use_icons to true if you have a Nerd Font
+      statusline.setup { vim.g.have_nerd_font }
+
+      -- You can configure sections in the statusline by overriding their
+      -- default behavior. For example, here we set the section for
+      -- cursor location to LINE:COLUMN
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_location = function()
+        return '%2l:%-2v'
+      end
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
-      -- require('mini.tabline').setup() -- Buffers tab bar on top
+      require('mini.tabline').setup() -- Buffers tab bar on top
 
       -- [[ My addtions ]]
+      -- require('mini.indentscope').setup()
     end,
   },
   { -- Highlight, edit, and navigate code
@@ -1032,7 +1033,7 @@ require('lazy').setup({
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  { import = 'custom.plugins' },
+  -- { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
